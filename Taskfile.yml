@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: '3'
+
+tasks:
+
+  cmd-dev-strapi:
+    desc: Forward command to be executed in dev/strapi
+    dir: dev/strapi
+    cmds:
+      - "{{.CLI_ARGS}}"
+  
+  cmd-dev-plugin:
+    desc: Forward command to be executed in dev/plugin
+    dir: strapi-plugin-json-schema-validation
+    cmds:
+      - "{{.CLI_ARGS}}"
