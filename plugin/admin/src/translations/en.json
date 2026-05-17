@@ -1,0 +1,8 @@
+{
+  "name": "JSON Schema Validation",
+  "description": "Provide JSON Schema validation custom field and utilities",
+  "field.label": "JSON Schema Validation",
+  "field.description": "Enter a JSON Schema to validate the content of this field.",
+  "options.base.jsonSchema.label": "JSON Schema",
+  "options.base.jsonSchema.description": "The JSON Schema to validate the content of this field against. Follow JSON schema DRAFT 2020-12 specification."
+}

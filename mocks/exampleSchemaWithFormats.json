@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "User Profile",
+  "type": "object",
+  "properties": {
+    "userId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "emailAddress": {
+      "type": "string",
+      "format": "email"
+    },
+    "website": {
+      "type": "string",
+      "format": "uri"
+    },
+    "lastLogin": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "ipAddress": {
+      "type": "string",
+      "format": "ipv4"
+    }
+  },
+  "required": ["userId", "emailAddress"]
+}

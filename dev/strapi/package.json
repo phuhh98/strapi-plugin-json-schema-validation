@@ -19,10 +19,11 @@
     "@strapi/plugin-users-permissions": "5.46.0",
     "@strapi/strapi": "5.46.0",
     "better-sqlite3": "12.8.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-router-dom": "^6.0.0",
-    "styled-components": "^6.0.0"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.30.3",
+    "strapi-plugin-json-schema-validation": "link:.yalc/strapi-plugin-json-schema-validation",
+    "styled-components": "^6.4.1"
   },
   "devDependencies": {
     "@types/node": "^20",
