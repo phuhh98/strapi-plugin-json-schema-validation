@@ -462,7 +462,12 @@ export interface ApiTestTest extends Struct.CollectionTypeSchema {
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     validated_field: Schema.Attribute.JSON &
-      Schema.Attribute.CustomField<'plugin::strapi-plugin-json-schema-validation.json-schema-validation'>;
+      Schema.Attribute.CustomField<
+        'plugin::strapi-plugin-json-schema-validation.json-schema-validation',
+        {
+          jsonSchema: '{\n  "$schema": "https://json-schema.org/draft/2020-12/schema",\n  "title": "User Profile",\n  "type": "object",\n  "properties": {\n    "userId": {\n      "type": "string",\n      "format": "uuid"\n    },\n    "emailAddress": {\n      "type": "string",\n      "format": "email"\n    },\n    "website": {\n      "type": "string",\n      "format": "uri"\n    },\n    "lastLogin": {\n      "type": "string",\n      "format": "date-time"\n    },\n    "ipAddress": {\n      "format": "ipv4"\n    }\n  },\n  "required": ["userId", "emailAddress"]\n}\n';
+        }
+      >;
   };
 }
 

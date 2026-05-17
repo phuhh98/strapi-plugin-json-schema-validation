@@ -13,7 +13,10 @@
   "attributes": {
     "validated_field": {
       "type": "customField",
-      "customField": "plugin::strapi-plugin-json-schema-validation.json-schema-validation"
+      "customField": "plugin::strapi-plugin-json-schema-validation.json-schema-validation",
+      "options": {
+        "jsonSchema": "{\n  \"$schema\": \"https://json-schema.org/draft/2020-12/schema\",\n  \"title\": \"User Profile\",\n  \"type\": \"object\",\n  \"properties\": {\n    \"userId\": {\n      \"type\": \"string\",\n      \"format\": \"uuid\"\n    },\n    \"emailAddress\": {\n      \"type\": \"string\",\n      \"format\": \"email\"\n    },\n    \"website\": {\n      \"type\": \"string\",\n      \"format\": \"uri\"\n    },\n    \"lastLogin\": {\n      \"type\": \"string\",\n      \"format\": \"date-time\"\n    },\n    \"ipAddress\": {\n      \"format\": \"ipv4\"\n    }\n  },\n  \"required\": [\"userId\", \"emailAddress\"]\n}\n"
+      }
     }
   }
 }

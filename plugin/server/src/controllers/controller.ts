@@ -9,6 +9,12 @@ const controller = ({ strapi }: { strapi: Core.Strapi }) => ({
       .service('service')
       .getWelcomeMessage();
   },
+
+  // async validateSchemaStructure(ctx) {
+  //   const { jsonSchema } = ctx.request.body;
+  //   const result = strapi.plugin(PLUGIN_ID).service('service').validateJSONSchema(jsonSchema);
+  //   ctx.body = { data: result };
+  // },
 });
 
 export default controller;

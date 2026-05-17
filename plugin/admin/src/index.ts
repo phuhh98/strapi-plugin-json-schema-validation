@@ -7,43 +7,14 @@ import {
 import { Initializer } from './components/Initializer';
 import { PluginIcon } from './components/PluginIcon';
 import { prefixPluginTranslations } from './utils/prefixPluginTranslation';
-import type { StrapiApp } from '@strapi/strapi/admin';
+import { useFetchClient, type StrapiApp } from '@strapi/strapi/admin';
 import { Braces } from 'lucide-react';
 
 import * as yup from 'yup';
+import { Schema } from 'jsonschema';
+import jsonSchemaValidator from './utils/preloadedJsonSchema';
 
-const worker = new Worker(new URL('./utils/validator.worker.js', import.meta.url));
-
-// Send a dynamic schema to the worker at runtime
-worker.postMessage({ schema: userGeneratedSchema });
-
-worker.onmessage = (event) => {
-  const { isValid, errors } = event.data;
-  if (!isValid) {
-    console.log('Dynamic schema is invalid:', errors);
-  } else {
-    console.log('Dynamic schema is completely valid!');
-  }
-};
-
-const isSchemaValid = (schema: string) => {
-  try {
-    const parsedSchema = JSON.parse(schema);
-    console.log('Parsed Schema:', parsedSchema);
-    const result = ajv.validateSchema(parsedSchema);
-    console.log('Schema Validation Result:', result);
-    return {
-      isValid: result,
-      errors: ajv.errors,
-    };
-  } catch (err) {
-    console.error('Invalid Schema:', err);
-    return {
-      isValid: false,
-      errors: [{ message: 'Invalid Schema' }],
-    };
-  }
-};
+import DRAFT_2020_12_SCHEMA from '../../shared/schemas/DRAFT-2020-12/schema';
 
 export default {
   register(app: StrapiApp) {
@@ -92,8 +63,7 @@ export default {
           [JSON_SCHEMA_FIELD_OPTIONS_KEY.base.jsonSchema]: yup
             .string()
             .required('JSON Schema is required')
-            .test('is-valid-json', 'Invalid JSON', (value) => {
-              console.log('Validating JSON Schema:', value);
+            .test('is-valid-json', 'Invalid JSON', function (value) {
               if (!value) return true; // handled by required rule
               try {
                 JSON.parse(value);
@@ -105,14 +75,35 @@ export default {
             .test(
               'is-valid-json-schema',
               'The JSON Schema must follow the DRAFT 2020-12 specification',
-              (value) => {
+              function (value) {
                 if (!value) return true;
-                const { isValid, errors } = isSchemaValid(value);
-                if (!isValid) {
-                  console.error('Invalid Schema:', errors);
-                  return false;
+
+                let parsedData = '';
+
+                try {
+                  parsedData = JSON.parse(value);
+                } catch (err: any) {
+                  return this.createError({ message: `Invalid JSON format: ${err.message}` });
                 }
-                return true;
+
+                try {
+                  const metaValidationResult = jsonSchemaValidator.validate(
+                    parsedData,
+                    DRAFT_2020_12_SCHEMA as Schema
+                  );
+
+                  const { valid, errors } = metaValidationResult;
+                  if (!valid) {
+                    return this.createError({
+                      message: `Invalid JSON Schema: ${errors?.map((e) => e.stack).join(', ')}`,
+                    });
+                  }
+                  return true;
+                } catch (err: any) {
+                  return this.createError({
+                    message: `Error during JSON Schema validation: ${err.message}`,
+                  });
+                }
               }
             ),
         }),
