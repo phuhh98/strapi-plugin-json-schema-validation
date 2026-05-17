@@ -1,47 +1,47 @@
 const DRAFT_2020_12_META_APPLICATOR = {
-  $schema: 'https://json-schema.org/draft/2020-12/schema',
-  $id: 'https://json-schema.org/draft/2020-12/meta/applicator',
-  $dynamicAnchor: 'meta',
-
-  title: 'Applicator vocabulary meta-schema',
-  type: ['object', 'boolean'],
-  properties: {
-    prefixItems: { $ref: '#/$defs/schemaArray' },
-    items: { $dynamicRef: '#meta' },
-    contains: { $dynamicRef: '#meta' },
-    additionalProperties: { $dynamicRef: '#meta' },
-    properties: {
-      type: 'object',
-      additionalProperties: { $dynamicRef: '#meta' },
-      default: {},
-    },
-    patternProperties: {
-      type: 'object',
-      additionalProperties: { $dynamicRef: '#meta' },
-      propertyNames: { format: 'regex' },
-      default: {},
-    },
-    dependentSchemas: {
-      type: 'object',
-      additionalProperties: { $dynamicRef: '#meta' },
-      default: {},
-    },
-    propertyNames: { $dynamicRef: '#meta' },
-    if: { $dynamicRef: '#meta' },
-    then: { $dynamicRef: '#meta' },
-    else: { $dynamicRef: '#meta' },
-    allOf: { $ref: '#/$defs/schemaArray' },
-    anyOf: { $ref: '#/$defs/schemaArray' },
-    oneOf: { $ref: '#/$defs/schemaArray' },
-    not: { $dynamicRef: '#meta' },
-  },
   $defs: {
     schemaArray: {
-      type: 'array',
-      minItems: 1,
       items: { $dynamicRef: '#meta' },
+      minItems: 1,
+      type: 'array',
     },
   },
+  $dynamicAnchor: 'meta',
+  $id: 'https://json-schema.org/draft/2020-12/meta/applicator',
+
+  $schema: 'https://json-schema.org/draft/2020-12/schema',
+  properties: {
+    additionalProperties: { $dynamicRef: '#meta' },
+    allOf: { $ref: '#/$defs/schemaArray' },
+    anyOf: { $ref: '#/$defs/schemaArray' },
+    contains: { $dynamicRef: '#meta' },
+    dependentSchemas: {
+      additionalProperties: { $dynamicRef: '#meta' },
+      default: {},
+      type: 'object',
+    },
+    else: { $dynamicRef: '#meta' },
+    if: { $dynamicRef: '#meta' },
+    items: { $dynamicRef: '#meta' },
+    not: { $dynamicRef: '#meta' },
+    oneOf: { $ref: '#/$defs/schemaArray' },
+    patternProperties: {
+      additionalProperties: { $dynamicRef: '#meta' },
+      default: {},
+      propertyNames: { format: 'regex' },
+      type: 'object',
+    },
+    prefixItems: { $ref: '#/$defs/schemaArray' },
+    properties: {
+      additionalProperties: { $dynamicRef: '#meta' },
+      default: {},
+      type: 'object',
+    },
+    propertyNames: { $dynamicRef: '#meta' },
+    then: { $dynamicRef: '#meta' },
+  },
+  title: 'Applicator vocabulary meta-schema',
+  type: ['object', 'boolean'],
 };
 
 export default DRAFT_2020_12_META_APPLICATOR;

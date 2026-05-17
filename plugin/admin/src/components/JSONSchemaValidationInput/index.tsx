@@ -1,19 +1,20 @@
-import React, { forwardRef, useMemo } from 'react';
-import { Button, Field, Flex, JSONInput, Typography } from '@strapi/design-system';
-import { useField } from '@strapi/strapi/admin';
-import { useIntl } from 'react-intl';
-import { Styled } from './styled';
 import Editor from '@monaco-editor/react';
+import { Field, Flex, Typography } from '@strapi/design-system';
+import { useField } from '@strapi/strapi/admin';
+import { forwardRef, useMemo } from 'react';
+import { useIntl } from 'react-intl';
+
+import { Styled } from './styled';
 
 export const JSONSchemaValidationInput = forwardRef<HTMLElement, any>((props, ref) => {
   const {
+    attribute,
     description,
+    disabled,
     error,
     hint,
-    label,
-    attribute,
-    disabled,
     intlLabel,
+    label,
     name,
     onChange,
     required,
@@ -24,29 +25,29 @@ export const JSONSchemaValidationInput = forwardRef<HTMLElement, any>((props, re
 
   return (
     <Field.Root
-      hint={description?.id ? formatMessage(description) : hint}
       error={error as string}
+      hint={description?.id ? formatMessage(description) : hint}
       name={name}
       required={required}
     >
-      <Flex direction="column" alignItems="stretch" gap={1}>
+      <Flex alignItems="stretch" direction="column" gap={1}>
         <Field.Label>{intlLabel?.id ? formatMessage(intlLabel) : label}</Field.Label>
-        <Flex ref={ref} direction={'row'} gap={2} alignItems={'flex-start'}>
+        <Flex alignItems={'flex-start'} direction={'row'} gap={2} ref={ref}>
           <Editor
-            height="50rem"
             defaultLanguage="json"
+            height="50rem"
+            loading={<Typography>Loading JSON Editor...</Typography>}
+            options={{
+              fontSize: 13,
+              formatOnPaste: true,
+              formatOnType: true,
+              minimap: { enabled: true },
+            }}
             // value={internalValue}
             // onChange={handleEditorChange}
             theme="vs-dark"
-            options={{
-              minimap: { enabled: true },
-              fontSize: 13,
-              formatOnType: true,
-              formatOnPaste: true,
-            }}
-            loading={<Typography>Loading JSON Editor...</Typography>}
           />
-          <Styled.ValidationButton size="S" onClick={() => {}}>
+          <Styled.ValidationButton onClick={() => {}} size="S">
             Validate
           </Styled.ValidationButton>
         </Flex>

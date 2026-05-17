@@ -1,61 +1,58 @@
-import { getTranslation } from './utils/getTranslation';
+import { type StrapiApp, useFetchClient } from '@strapi/strapi/admin';
+import { Schema } from 'jsonschema';
+import { Braces } from 'lucide-react';
+import * as yup from 'yup';
+
 import {
   JSON_SCHEMA_FIELD_OPTIONS_KEY,
   PLUGIN_CUSTOM_JSON_FIELD_NAME,
   PLUGIN_ID,
 } from '../../shared/constants/plugin';
+import DRAFT_2020_12_SCHEMA from '../../shared/schemas/DRAFT-2020-12/schema';
 import { Initializer } from './components/Initializer';
 import { PluginIcon } from './components/PluginIcon';
+import { getTranslation } from './utils/getTranslation';
 import { prefixPluginTranslations } from './utils/prefixPluginTranslation';
-import { useFetchClient, type StrapiApp } from '@strapi/strapi/admin';
-import { Braces } from 'lucide-react';
-
-import * as yup from 'yup';
-import { Schema } from 'jsonschema';
 import jsonSchemaValidator from './utils/preloadedJsonSchema';
-
-import DRAFT_2020_12_SCHEMA from '../../shared/schemas/DRAFT-2020-12/schema';
 
 export default {
   register(app: StrapiApp) {
     app.customFields.register({
-      name: PLUGIN_CUSTOM_JSON_FIELD_NAME,
-      pluginId: PLUGIN_ID,
-      type: 'json',
-      icon: Braces,
-      intlLabel: {
-        id: getTranslation('field.label'),
-        defaultMessage: 'JSON Schema Validation',
-      },
-      intlDescription: {
-        id: getTranslation('field.description'),
-        defaultMessage: 'Enter a JSON Schema to validate the content of this field.',
-      },
       components: {
         Input: async () =>
           import('./components/JSONSchemaValidationInput').then((module) => ({
             default: module.default,
           })),
       },
+      icon: Braces,
+      intlDescription: {
+        defaultMessage: 'Enter a JSON Schema to validate the content of this field.',
+        id: getTranslation('field.description'),
+      },
+      intlLabel: {
+        defaultMessage: 'JSON Schema Validation',
+        id: getTranslation('field.label'),
+      },
+      name: PLUGIN_CUSTOM_JSON_FIELD_NAME,
       options: {
         base: [
           {
-            sectionTitle: null,
             items: [
               {
+                defaultValue: '{}',
+                description: {
+                  defaultMessage: 'Follow JSON schema DRAFT 2020-12 specification.',
+                  id: getTranslation('options.base.jsonSchema.description'),
+                },
+                intlLabel: {
+                  defaultMessage: 'JSON Schema',
+                  id: getTranslation('options.base.jsonSchema.label'),
+                },
                 name: `options.${JSON_SCHEMA_FIELD_OPTIONS_KEY.base.jsonSchema}`,
                 type: 'json',
-                intlLabel: {
-                  id: getTranslation('options.base.jsonSchema.label'),
-                  defaultMessage: 'JSON Schema',
-                },
-                description: {
-                  id: getTranslation('options.base.jsonSchema.description'),
-                  defaultMessage: 'Follow JSON schema DRAFT 2020-12 specification.',
-                },
-                defaultValue: '{}',
               },
             ],
+            sectionTitle: null,
           },
         ],
 
@@ -68,7 +65,7 @@ export default {
               try {
                 JSON.parse(value);
                 return true;
-              } catch (err) {
+              } catch (_err) {
                 return false;
               }
             })
@@ -92,7 +89,7 @@ export default {
                     DRAFT_2020_12_SCHEMA as Schema
                   );
 
-                  const { valid, errors } = metaValidationResult;
+                  const { errors, valid } = metaValidationResult;
                   if (!valid) {
                     return this.createError({
                       message: `Invalid JSON Schema: ${errors?.map((e) => e.stack).join(', ')}`,
@@ -108,6 +105,8 @@ export default {
             ),
         }),
       },
+      pluginId: PLUGIN_ID,
+      type: 'json',
     });
   },
 

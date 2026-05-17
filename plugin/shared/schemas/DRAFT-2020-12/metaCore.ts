@@ -1,48 +1,48 @@
 export default {
-  $schema: 'https://json-schema.org/draft/2020-12/schema',
-  $id: 'https://json-schema.org/draft/2020-12/meta/core',
+  $defs: {
+    anchorString: {
+      pattern: '^[A-Za-z_][-A-Za-z0-9._]*$',
+      type: 'string',
+    },
+    uriReferenceString: {
+      format: 'uri-reference',
+      type: 'string',
+    },
+    uriString: {
+      format: 'uri',
+      type: 'string',
+    },
+  },
   $dynamicAnchor: 'meta',
+  $id: 'https://json-schema.org/draft/2020-12/meta/core',
 
-  title: 'Core vocabulary meta-schema',
-  type: ['object', 'boolean'],
+  $schema: 'https://json-schema.org/draft/2020-12/schema',
   properties: {
-    $id: {
-      $ref: '#/$defs/uriReferenceString',
-      $comment: 'Non-empty fragments not allowed.',
-      pattern: '^[^#]*#?$',
-    },
-    $schema: { $ref: '#/$defs/uriString' },
-    $ref: { $ref: '#/$defs/uriReferenceString' },
     $anchor: { $ref: '#/$defs/anchorString' },
-    $dynamicRef: { $ref: '#/$defs/uriReferenceString' },
-    $dynamicAnchor: { $ref: '#/$defs/anchorString' },
-    $vocabulary: {
-      type: 'object',
-      propertyNames: { $ref: '#/$defs/uriString' },
-      additionalProperties: {
-        type: 'boolean',
-      },
-    },
     $comment: {
       type: 'string',
     },
     $defs: {
-      type: 'object',
       additionalProperties: { $dynamicRef: '#meta' },
+      type: 'object',
+    },
+    $dynamicAnchor: { $ref: '#/$defs/anchorString' },
+    $dynamicRef: { $ref: '#/$defs/uriReferenceString' },
+    $id: {
+      $comment: 'Non-empty fragments not allowed.',
+      $ref: '#/$defs/uriReferenceString',
+      pattern: '^[^#]*#?$',
+    },
+    $ref: { $ref: '#/$defs/uriReferenceString' },
+    $schema: { $ref: '#/$defs/uriString' },
+    $vocabulary: {
+      additionalProperties: {
+        type: 'boolean',
+      },
+      propertyNames: { $ref: '#/$defs/uriString' },
+      type: 'object',
     },
   },
-  $defs: {
-    anchorString: {
-      type: 'string',
-      pattern: '^[A-Za-z_][-A-Za-z0-9._]*$',
-    },
-    uriString: {
-      type: 'string',
-      format: 'uri',
-    },
-    uriReferenceString: {
-      type: 'string',
-      format: 'uri-reference',
-    },
-  },
+  title: 'Core vocabulary meta-schema',
+  type: ['object', 'boolean'],
 };

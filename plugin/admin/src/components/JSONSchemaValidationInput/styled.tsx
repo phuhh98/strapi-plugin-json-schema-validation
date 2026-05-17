@@ -1,5 +1,5 @@
+import { Button, Flex } from '@strapi/design-system';
 import styled from 'styled-components';
-import { Button, Flex, JSONInput } from '@strapi/design-system';
 
 export const Styled = {
   FieldContainer: styled(Flex)`

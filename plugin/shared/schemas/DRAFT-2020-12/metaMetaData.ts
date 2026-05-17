@@ -1,34 +1,34 @@
 export default {
-  $schema: 'https://json-schema.org/draft/2020-12/schema',
-  $id: 'https://json-schema.org/draft/2020-12/meta/meta-data',
   $dynamicAnchor: 'meta',
+  $id: 'https://json-schema.org/draft/2020-12/meta/meta-data',
+  $schema: 'https://json-schema.org/draft/2020-12/schema',
 
-  title: 'Meta-data vocabulary meta-schema',
-
-  type: ['object', 'boolean'],
   properties: {
-    title: {
-      type: 'string',
+    default: true,
+    deprecated: {
+      default: false,
+      type: 'boolean',
     },
     description: {
       type: 'string',
     },
-    default: true,
-    deprecated: {
-      type: 'boolean',
-      default: false,
+    examples: {
+      items: true,
+      type: 'array',
     },
     readOnly: {
-      type: 'boolean',
       default: false,
+      type: 'boolean',
+    },
+    title: {
+      type: 'string',
     },
     writeOnly: {
-      type: 'boolean',
       default: false,
-    },
-    examples: {
-      type: 'array',
-      items: true,
+      type: 'boolean',
     },
   },
+
+  title: 'Meta-data vocabulary meta-schema',
+  type: ['object', 'boolean'],
 };

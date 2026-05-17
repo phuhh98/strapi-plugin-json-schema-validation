@@ -1,14 +1,14 @@
 export default {
-  $schema: 'https://json-schema.org/draft/2020-12/schema',
-  $id: 'https://json-schema.org/draft/2020-12/meta/content',
   $dynamicAnchor: 'meta',
+  $id: 'https://json-schema.org/draft/2020-12/meta/content',
+  $schema: 'https://json-schema.org/draft/2020-12/schema',
 
-  title: 'Content vocabulary meta-schema',
-
-  type: ['object', 'boolean'],
   properties: {
     contentEncoding: { type: 'string' },
     contentMediaType: { type: 'string' },
     contentSchema: { $dynamicRef: '#meta' },
   },
+
+  title: 'Content vocabulary meta-schema',
+  type: ['object', 'boolean'],
 };
