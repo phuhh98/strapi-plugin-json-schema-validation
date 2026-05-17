@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+
 import { PLUGIN_ID } from '../../../shared/constants/plugin';
 
 type InitializerProps = {

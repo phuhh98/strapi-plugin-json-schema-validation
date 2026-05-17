@@ -1,5 +1,4 @@
 export default () => ({
-  type: 'admin',
   routes: [
     // {
     //   method: 'POST',
@@ -7,4 +6,5 @@ export default () => ({
     //   handler: 'myController.validateSchemaStructure',
     // },
   ],
+  type: 'admin',
 });

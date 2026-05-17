@@ -1,4 +1,5 @@
 import type { Core } from '@strapi/strapi';
+
 import { PLUGIN_ID } from '../../../shared/constants/plugin';
 
 const controller = ({ strapi }: { strapi: Core.Strapi }) => ({

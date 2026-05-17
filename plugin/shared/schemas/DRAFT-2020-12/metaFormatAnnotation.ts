@@ -1,11 +1,11 @@
 export default {
-  $schema: 'https://json-schema.org/draft/2020-12/schema',
-  $id: 'https://json-schema.org/draft/2020-12/meta/format-annotation',
   $dynamicAnchor: 'meta',
+  $id: 'https://json-schema.org/draft/2020-12/meta/format-annotation',
+  $schema: 'https://json-schema.org/draft/2020-12/schema',
 
-  title: 'Format vocabulary meta-schema for annotation results',
-  type: ['object', 'boolean'],
   properties: {
     format: { type: 'string' },
   },
+  title: 'Format vocabulary meta-schema for annotation results',
+  type: ['object', 'boolean'],
 };

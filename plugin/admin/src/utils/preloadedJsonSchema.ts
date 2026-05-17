@@ -8,13 +8,14 @@
  */
 
 import { Schema, Validator } from 'jsonschema';
-import metaCore from '../../../shared/schemas/DRAFT-2020-12/metaCore';
+
 import metaApplication from '../../../shared/schemas/DRAFT-2020-12/metaApplication';
-import metaValidation from '../../../shared/schemas/DRAFT-2020-12/metaValidation';
 import metaContent from '../../../shared/schemas/DRAFT-2020-12/metaContent';
+import metaCore from '../../../shared/schemas/DRAFT-2020-12/metaCore';
 import metaFormatAnnotation from '../../../shared/schemas/DRAFT-2020-12/metaFormatAnnotation';
 import metaMetaData from '../../../shared/schemas/DRAFT-2020-12/metaMetaData';
 import metaUnevaluated from '../../../shared/schemas/DRAFT-2020-12/metaUnevaluated';
+import metaValidation from '../../../shared/schemas/DRAFT-2020-12/metaValidation';
 
 const v = new Validator();
 v.addSchema(metaCore as Schema);
