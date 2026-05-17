@@ -12,6 +12,6 @@ tasks:
   
   cmd-dev-plugin:
     desc: Forward command to be executed in dev/plugin
-    dir: strapi-plugin-json-schema-validation
+    dir: plugin
     cmds:
       - "{{.CLI_ARGS}}"
