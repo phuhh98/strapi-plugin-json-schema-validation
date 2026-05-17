@@ -1,27 +1,33 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "User Profile",
+  "description": "Schema enforcing structural and format validation for core user profile metadata.",
   "type": "object",
   "properties": {
     "userId": {
       "type": "string",
-      "format": "uuid"
+      "format": "uuid",
+      "description": "The unique, immutable identifier for the user. Must conform to a standard UUIDv4 format."
     },
     "emailAddress": {
       "type": "string",
-      "format": "email"
+      "format": "email",
+      "description": "The user's primary contact email address. Used for authentication and system notifications."
     },
     "website": {
       "type": "string",
-      "format": "uri"
+      "format": "uri",
+      "description": "The URL of the user's personal website or portfolio. Must include a valid protocol scheme (e.g., https://)."
     },
     "lastLogin": {
       "type": "string",
-      "format": "date-time"
+      "format": "date-time",
+      "description": "Timestamp tracking when the user most recently authenticated. Must follow the ISO 8601 extended format (e.g., YYYY-MM-DDTHH:mm:ssZ)."
     },
     "ipAddress": {
       "type": "string",
-      "format": "ipv4"
+      "format": "ipv4",
+      "description": "The public IPv4 address recorded during the user's last active session (e.g., 192.0.2.1)."
     }
   },
   "required": ["userId", "emailAddress"]

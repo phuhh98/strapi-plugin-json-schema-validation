@@ -1,3 +1,5 @@
+import { getHandlerName } from '../../utils/names';
+
 export default () => ({
   routes: [
     {
@@ -5,7 +7,7 @@ export default () => ({
         policies: [],
       },
       // name of the controller file & the method.
-      handler: 'controller.index',
+      handler: getHandlerName('controller.index'),
       method: 'GET',
       path: '/',
     },

@@ -6,20 +6,9 @@ const service = ({ strapi: _strapi }: { strapi: Core.Strapi }) => ({
   getWelcomeMessage() {
     return 'Welcome to Strapi 🚀';
   },
-
-  validateJSONSchema(jsonSchema: string) {
-    try {
-      const parsedSchema = JSON.parse(jsonSchema);
-      const isValid = ajv.validateSchema(parsedSchema);
-      return {
-        errors: ajv.errors,
-        isValid,
-      };
-    } catch (err) {
-      console.error('Invalid JSON Schema:', err);
-      return { error: 'Invalid JSON Schema', isValid: false };
-    }
-  },
 });
+
+export type Service = ReturnType<typeof service>;
+export type ServiceMethod = keyof Service;
 
 export default service;

@@ -13,7 +13,7 @@ const config: Core.Config.Middlewares = [
           'script-src': [
             'cdn.jsdelivr.net',
           ],
-          'worker-src': ["'self'", 'unsafe-eval'], // Allow workers from the same origin and eval for Web Workers
+          'worker-src': ["'self'", 'blob:'], // Allow workers from the same origin and eval for Web Workers
         },
       },
     },
