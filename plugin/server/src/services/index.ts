@@ -1,5 +1,17 @@
-import service from './service';
+import service, { Service } from './service';
+import validation, { ValidationService } from './validation';
+
+export enum ServiceName {
+  Service = 'service',
+  Validation = 'validation',
+}
+
+export type Services = {
+  [ServiceName.Service]: Service;
+  [ServiceName.Validation]: ValidationService;
+};
 
 export default {
-  service,
+  [ServiceName.Service]: service,
+  [ServiceName.Validation]: validation,
 };

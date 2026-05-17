@@ -461,11 +461,11 @@ export interface ApiTestTest extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    validated_field: Schema.Attribute.JSON &
+    validated: Schema.Attribute.JSON &
       Schema.Attribute.CustomField<
         'plugin::strapi-plugin-json-schema-validation.json-schema-validation',
         {
-          jsonSchema: '{\n  "$schema": "https://json-schema.org/draft/2020-12/schema",\n  "title": "User Profile",\n  "type": "object",\n  "properties": {\n    "userId": {\n      "type": "string",\n      "format": "uuid"\n    },\n    "emailAddress": {\n      "type": "string",\n      "format": "email"\n    },\n    "website": {\n      "type": "string",\n      "format": "uri"\n    },\n    "lastLogin": {\n      "type": "string",\n      "format": "date-time"\n    },\n    "ipAddress": {\n      "format": "ipv4"\n    }\n  },\n  "required": ["userId", "emailAddress"]\n}\n';
+          jsonSchema: '{\n  "$schema": "https://json-schema.org/draft/2020-12/schema",\n  "title": "User Profile",\n  "description": "Schema enforcing structural and format validation for core user profile metadata.",\n  "type": "object",\n  "properties": {\n    "userId": {\n      "type": "string",\n      "format": "uuid",\n      "description": "The unique, immutable identifier for the user. Must conform to a standard UUIDv4 format."\n    },\n    "emailAddress": {\n      "type": "string",\n      "format": "email",\n      "description": "The user\'s primary contact email address. Used for authentication and system notifications."\n    },\n    "website": {\n      "type": "string",\n      "format": "uri",\n      "description": "The URL of the user\'s personal website or portfolio. Must include a valid protocol scheme (e.g., https://)."\n    },\n    "lastLogin": {\n      "type": "string",\n      "format": "date-time",\n      "description": "Timestamp tracking when the user most recently authenticated. Must follow the ISO 8601 extended format (e.g., YYYY-MM-DDTHH:mm:ssZ)."\n    },\n    "ipAddress": {\n      "type": "string",\n      "format": "ipv4",\n      "description": "The public IPv4 address recorded during the user\'s last active session (e.g., 192.0.2.1)."\n    }\n  },\n  "required": ["userId", "emailAddress"]\n}';
         }
       >;
   };

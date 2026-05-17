@@ -39,7 +39,6 @@ export default {
           {
             items: [
               {
-                defaultValue: '{}',
                 description: {
                   defaultMessage: 'Follow JSON schema DRAFT 2020-12 specification.',
                   id: getTranslation('options.base.jsonSchema.description'),
