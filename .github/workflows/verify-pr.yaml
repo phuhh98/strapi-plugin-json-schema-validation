@@ -28,6 +28,7 @@ jobs:
           node-version: 22.x
           cache: "npm"
           package-manager-cache: true
+          cache-dependency-path: "plugin/package-lock.json"
 
       - name: 📦 Install dependencies
         run: npm ci
