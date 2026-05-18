@@ -45,8 +45,8 @@ jobs:
       - name: 🧪 Type check (backend)
         run: npm run test:ts:back
 
-      - name: ✅ Verify package
-        run: npm run verify
-
       - name: 🏗️ Build package
         run: npm run build
+
+      - name: ✅ Verify package
+        run: npm run verify
