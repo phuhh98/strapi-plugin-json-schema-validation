@@ -68,13 +68,13 @@ jobs:
         run: npm ci
 
       - name: 🧪 Run tests
-        run: npm test:ts:front && npm test:ts:back
-
-      - name: ✅ Verify package
-        run: npm run verify
+        run: npm run test:ts:front && npm run test:ts:back
 
       - name: 🏗️ Build package
         run: npm run build --if-present
+
+      - name: ✅ Verify package
+        run: npm run verify
 
       - name: 📦 Publish package
         run: npm publish
