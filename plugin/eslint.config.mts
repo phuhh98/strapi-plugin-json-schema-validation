@@ -17,6 +17,7 @@ export default defineConfig([
   pluginReact.configs.flat.recommended,
   {
     rules: {
+      '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-unused-vars': [
         'error',
         {
