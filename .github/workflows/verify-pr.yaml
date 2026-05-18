@@ -12,8 +12,12 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  verify-and-build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./plugin
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -25,29 +29,22 @@ jobs:
           package-manager-cache: true
 
       - name: Install dependencies
-        working-directory: ./plugin
         run: npm install
 
       - name: Lint
-        working-directory: ./plugin
         run: npm run lint
 
       - name: Check formatting
-        working-directory: ./plugin
         run: npm run format
 
       - name: Type check (frontend)
-        working-directory: ./plugin
         run: npm run test:ts:front
 
       - name: Type check (backend)
-        working-directory: ./plugin
         run: npm run test:ts:back
 
       - name: Verify
-        working-directory: ./plugin
         run: npm run verify
 
       - name: Build
-        working-directory: ./plugin
         run: npm run build
