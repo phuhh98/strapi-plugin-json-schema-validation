@@ -1,4 +1,4 @@
-import { type StrapiApp, useFetchClient } from '@strapi/strapi/admin';
+import { type StrapiApp } from '@strapi/strapi/admin';
 import { Schema } from 'jsonschema';
 import { Braces } from 'lucide-react';
 import * as yup from 'yup';
@@ -9,8 +9,6 @@ import {
   PLUGIN_ID,
 } from '../../shared/constants/plugin';
 import DRAFT_2020_12_SCHEMA from '../../shared/schemas/DRAFT-2020-12/schema';
-import { Initializer } from './components/Initializer';
-import { PluginIcon } from './components/PluginIcon';
 import { getTranslation } from './utils/getTranslation';
 import { prefixPluginTranslations } from './utils/prefixPluginTranslation';
 import jsonSchemaValidator from './utils/preloadedJsonSchema';
@@ -78,7 +76,7 @@ export default {
 
                 try {
                   parsedData = JSON.parse(value);
-                } catch (err: any) {
+                } catch (err: { message: string }) {
                   return this.createError({ message: `Invalid JSON format: ${err.message}` });
                 }
 
@@ -95,7 +93,7 @@ export default {
                     });
                   }
                   return true;
-                } catch (err: any) {
+                } catch (err: { message: string }) {
                   return this.createError({
                     message: `Error during JSON Schema validation: ${err.message}`,
                   });

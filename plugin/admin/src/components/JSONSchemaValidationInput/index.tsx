@@ -1,18 +1,30 @@
 import Editor, { EditorProps } from '@monaco-editor/react';
 import { Field, Flex, Typography } from '@strapi/design-system';
-import { useField } from '@strapi/strapi/admin';
-import React, { forwardRef, useMemo, useRef, useState } from 'react';
+// import { useField } from '@strapi/strapi/admin';
+import { /* type FieldValue, type InputProps,*/ useFetchClient } from '@strapi/strapi/admin';
+import { forwardRef, useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
-import { useFetchClient } from '@strapi/strapi/admin';
 
-import { Styled } from './styled';
 import { PLUGIN_ID } from '../../../../shared/constants/plugin';
+import { Styled } from './styled';
+
+// type JSONSchemaValidationInputProps = InputProps &
+//   FieldValue<string> & {
+//     intlLabel?: string;
+//     description?: string;
+//     disabled?: boolean;
+//     attribute: {
+//       options: {
+//         jsonSchema: string;
+//       };
+//     };
+//   };
 
 export const JSONSchemaValidationInput = forwardRef<HTMLElement, any>((props, ref) => {
   const {
     attribute,
     description,
-    disabled,
+    disabled: _disabled,
     error,
     hint,
     intlLabel,
@@ -23,22 +35,22 @@ export const JSONSchemaValidationInput = forwardRef<HTMLElement, any>((props, re
     value,
   } = props; // these are just some of the props passed by the content-manager
 
-  const editorRef = useRef<Parameters<NonNullable<EditorProps['onMount']>>[0]>(null);
+  const editorRef = useRef<null | Parameters<NonNullable<EditorProps['onMount']>>[0]>(null);
 
   function triggerEditorFormat() {
     if (editorRef.current != null) {
       // Manually trigger the format document action
-      editorRef.current.trigger('manual', 'editor.action.formatDocument');
+      editorRef.current.trigger('manual', 'editor.action.formatDocument', null);
     }
   }
 
   const { formatMessage } = useIntl();
-  const { get, post } = useFetchClient();
+  const { post } = useFetchClient();
 
   const [internalValue, setInternalValue] = useState<string>(value);
-  const [internalError, setInternalError] = useState<string>(error);
+  const [internalError, setInternalError] = useState<string>(error ?? '');
 
-  const validateJSONSchema = async (jsonSchema: string | object, data: string | object) => {
+  const validateJSONSchema = async (jsonSchema: object | string, data: object | string) => {
     let parsedSchema: object;
     let parsedData: object;
     try {
@@ -51,8 +63,8 @@ export const JSONSchemaValidationInput = forwardRef<HTMLElement, any>((props, re
 
     try {
       const response = await post(`/${PLUGIN_ID}/validateSchema`, {
-        schema: parsedSchema,
         data: parsedData,
+        schema: parsedSchema,
       });
       return response.data;
     } catch (err) {
@@ -81,7 +93,7 @@ export const JSONSchemaValidationInput = forwardRef<HTMLElement, any>((props, re
     } else {
       setInternalError(
         result.data.errors
-          ? `Validation errors: ${result.data.errors.map((e) => e.message).join('\n')}`
+          ? `Validation errors: ${result.data.errors.map((e: { message: string }) => e.message).join('\n')}`
           : result.data.processingError
             ? `Processing error: ${result.data.processingError}`
             : 'Invalid JSON Schema or data'
@@ -100,22 +112,9 @@ export const JSONSchemaValidationInput = forwardRef<HTMLElement, any>((props, re
         <Field.Label>{intlLabel?.id ? formatMessage(intlLabel) : label}</Field.Label>
         <Flex alignItems={'flex-start'} direction={'row'} gap={2} ref={ref}>
           <Editor
-            defaultLanguage="json"
-            height="50rem"
-            loading={<Typography>Loading JSON Editor...</Typography>}
-            options={{
-              fontSize: 13,
-              formatOnPaste: true,
-              formatOnType: true,
-              minimap: { enabled: true },
-            }}
-            value={internalValue}
-            onChange={(value) => setInternalValue(value || '')}
-            theme="vs-dark"
             beforeMount={(monaco) => {
               if (monaco) {
                 monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
-                  validate: true,
                   schemas: [
                     {
                       // uri: MY_JSON_SCHEMA.id,
@@ -123,12 +122,25 @@ export const JSONSchemaValidationInput = forwardRef<HTMLElement, any>((props, re
                       schema: JSON.parse(attribute['options']['jsonSchema']),
                     },
                   ],
+                  validate: true,
                 });
               }
             }}
+            defaultLanguage="json"
+            height="50rem"
+            loading={<Typography>Loading JSON Editor...</Typography>}
+            onChange={(value) => setInternalValue(value || '')}
             onMount={(editor) => {
               editorRef.current = editor;
             }}
+            options={{
+              fontSize: 13,
+              formatOnPaste: true,
+              formatOnType: true,
+              minimap: { enabled: true },
+            }}
+            theme="vs-dark"
+            value={internalValue}
           />
           <Styled.ValidationButton onClick={handleValidateClick} size="S">
             Validate
@@ -140,5 +152,7 @@ export const JSONSchemaValidationInput = forwardRef<HTMLElement, any>((props, re
     </Field.Root>
   );
 });
+
+JSONSchemaValidationInput.displayName = 'JSONSchemaValidationInput';
 
 export default JSONSchemaValidationInput;
