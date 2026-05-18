@@ -45,7 +45,9 @@ export default {
                   defaultMessage: 'JSON Schema',
                   id: getTranslation('options.base.jsonSchema.label'),
                 },
+                // @ts-expect-error: types from strapi is not 100% correct with custom fields
                 name: `options.${JSON_SCHEMA_FIELD_OPTIONS_KEY.base.jsonSchema}`,
+                // @ts-expect-error: 'json' is correct here https://docs.strapi.io/cms/features/custom-fields#registering-a-custom-field-in-the-admin-panel
                 type: 'json',
               },
             ],
@@ -76,7 +78,7 @@ export default {
 
                 try {
                   parsedData = JSON.parse(value);
-                } catch (err: { message: string }) {
+                } catch (err: any) {
                   return this.createError({ message: `Invalid JSON format: ${err.message}` });
                 }
 
@@ -93,7 +95,7 @@ export default {
                     });
                   }
                   return true;
-                } catch (err: { message: string }) {
+                } catch (err: any) {
                   return this.createError({
                     message: `Error during JSON Schema validation: ${err.message}`,
                   });
