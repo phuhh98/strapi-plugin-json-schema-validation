@@ -16,10 +16,11 @@ permissions:
 jobs:
   release:
     name: 🏷️ Semantic Release & Tagging
-    # Only run if the PR was actually merged
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-    # Outputs the new tag name for the next job to use
+    defaults:
+      run:
+        working-directory: ./plugin
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
       tag_name: ${{ steps.release.outputs.tag_name }}
