@@ -1,6 +1,13 @@
 {
   "version": "0.0.0",
-  "keywords": [],
+  "keywords": [
+    "strapi",
+    "plugin",
+    "json",
+    "schema",
+    "validation",
+    "custom field"
+  ],
   "type": "commonjs",
   "exports": {
     "./package.json": "./package.json",

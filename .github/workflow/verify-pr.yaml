@@ -1,0 +1,53 @@
+name: ✅ Check Development Branches for PRs
+
+on:
+  pull_request:
+    types:
+      - opened
+  push:
+    branches-ignore:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22.x
+          package-manager-cache: true
+
+      - name: Install dependencies
+        working-directory: ./plugin
+        run: npm install
+
+      - name: Lint
+        working-directory: ./plugin
+        run: npm run lint
+
+      - name: Check formatting
+        working-directory: ./plugin
+        run: npm run format
+
+      - name: Type check (frontend)
+        working-directory: ./plugin
+        run: npm run test:ts:front
+
+      - name: Type check (backend)
+        working-directory: ./plugin
+        run: npm run test:ts:back
+
+      - name: Verify
+        working-directory: ./plugin
+        run: npm run verify
+
+      - name: Build
+        working-directory: ./plugin
+        run: npm run build

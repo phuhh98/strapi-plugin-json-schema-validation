@@ -1,0 +1,82 @@
+name: 🚀 Release Please - strapi-plugin-json-schema-validation
+
+on:
+  pull_request:
+    # Trigger only when a PR is merged (i.e., closed and merged)
+    types:
+      - closed
+    branches:
+      - main
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  release:
+    name: 🏷️ Semantic Release & Tagging
+    # Only run if the PR was actually merged
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    # Outputs the new tag name for the next job to use
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+
+    steps:
+      - name: ⬇️ Checkout Repository
+        uses: actions/checkout@v6
+        with:
+          # Fetch all history to accurately calculate semantic version
+          fetch-depth: 0
+
+      - name: ⚙️ Semantic Release (Tagging Only)
+        id: release
+        uses: googleapis/release-please-action@v4
+        with:
+          release-type: node
+          token: ${{ secrets.RELEASE_PLEASE_GITHUB_TOKEN }}
+          config-file: .github/release-please-config-main.json
+          manifest-file: .github/.release-please-manifest-main.json
+
+  publish-to-npm:
+    name: 📦 Publish package to npm
+    needs: release
+    if: needs.release.outputs.release_created
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: ⬇️ Checkout code
+        uses: actions/checkout@v6
+
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@v6
+        working-directory: ./plugin
+        with:
+          node-version: 22.x
+          registry-url: "https://registry.npmjs.org"
+          package-manager-cache: false # never use caching in release builds
+
+      - name: 📦 Install dependencies
+        run: npm ci
+        working-directory: ./plugin
+
+      - name: 🧪 Run tests
+        run: npm test:ts:front && npm test:ts:back
+        working-directory: ./plugin
+
+      - name: ✅ Verify package
+        run: npm run verify
+        working-directory: ./plugin
+
+      - name: 🏗️ Build package
+        run: npm run build --if-present
+        working-directory: ./plugin
+
+      - name: 📦 Publish package
+        run: npm publish --provenance
+        working-directory: ./plugin
