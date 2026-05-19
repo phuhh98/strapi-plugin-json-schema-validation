@@ -74,4 +74,4 @@ jobs:
         run: npm run verify
 
       - name: 📦 Publish package
-        run: npm publish
+        run: npm publish --provenance
