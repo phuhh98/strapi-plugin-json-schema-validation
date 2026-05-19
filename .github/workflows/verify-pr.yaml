@@ -2,11 +2,9 @@ name: ✅ Check Development Branches for PRs
 
 on:
   pull_request:
-    types:
-      - opened
-  push:
-    branches-ignore:
+    branches:
       - main
+    types: [opened, synchronize, reopened]
 
 permissions:
   contents: read
