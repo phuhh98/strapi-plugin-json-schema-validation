@@ -71,7 +71,7 @@ export default config;
 
 ### Basic Options
 - [x] **Plain JSON Schema Input**
-- [ ] **Theme selector**
+- [x] **Theme selector**
 
 ### Advanced Options
 - [ ] **Schema URL**: allow users to provide a URL to fetch the JSON Schema from, in addition to the plain JSON Schema input
