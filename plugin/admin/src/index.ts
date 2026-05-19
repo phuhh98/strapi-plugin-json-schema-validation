@@ -53,90 +53,90 @@ export default {
               },
               {
                 description: {
-                  id: getTranslationKey('options.base.theme.description'),
                   defaultMessage: 'Select the theme for the JSON editor in the content manager.',
+                  id: getTranslationKey('options.base.theme.description'),
                 },
                 intlLabel: {
-                  id: getTranslationKey('options.base.theme.label'),
                   defaultMessage: 'JSON Editor Theme',
+                  id: getTranslationKey('options.base.theme.label'),
                 },
                 // @ts-expect-error: types from strapi is not 100% correct with custom fields
                 name: `options.${JSON_SCHEMA_FIELD_OPTIONS_KEY.base.theme}`,
-                type: 'select',
-                value: THEME.VS_DARK,
                 options: [
                   {
-                    key: THEME.VS_DARK,
                     defaultValue: true,
-                    value: THEME.VS_DARK,
+                    key: THEME.VS_DARK,
                     metadatas: {
                       intlLabel: {
-                        id: getTranslationKey('options.base.theme.vs_dark.label'),
                         defaultMessage: 'VS-Dark',
+                        id: getTranslationKey('options.base.theme.vs_dark.label'),
                       },
                     },
+                    value: THEME.VS_DARK,
                   },
                   {
                     key: THEME.LIGHT,
-                    value: THEME.LIGHT,
                     metadatas: {
                       intlLabel: {
-                        id: getTranslationKey('options.base.theme.light.label'),
                         defaultMessage: 'Light',
+                        id: getTranslationKey('options.base.theme.light.label'),
                       },
                     },
+                    value: THEME.LIGHT,
                   },
                   {
                     key: THEME.GITHUB,
-                    value: THEME.GITHUB,
                     metadatas: {
                       intlLabel: {
-                        id: getTranslationKey('options.base.theme.github.label'),
                         defaultMessage: 'GitHub',
+                        id: getTranslationKey('options.base.theme.github.label'),
                       },
                     },
+                    value: THEME.GITHUB,
                   },
                   {
                     key: THEME.GITHUB_LIGHT,
-                    value: THEME.GITHUB_LIGHT,
                     metadatas: {
                       intlLabel: {
-                        id: getTranslationKey('options.base.theme.github_light.label'),
                         defaultMessage: 'GitHub Light',
+                        id: getTranslationKey('options.base.theme.github_light.label'),
                       },
                     },
+                    value: THEME.GITHUB_LIGHT,
                   },
                   {
                     key: THEME.GITHUB_DARK,
-                    value: THEME.GITHUB_DARK,
                     metadatas: {
                       intlLabel: {
-                        id: getTranslationKey('options.base.theme.github_dark.label'),
                         defaultMessage: 'GitHub Dark',
+                        id: getTranslationKey('options.base.theme.github_dark.label'),
                       },
                     },
+                    value: THEME.GITHUB_DARK,
                   },
                   {
                     key: THEME.MONOKAI,
-                    value: THEME.MONOKAI,
                     metadatas: {
                       intlLabel: {
-                        id: getTranslationKey('options.base.theme.monokai.label'),
                         defaultMessage: 'Monokai',
+                        id: getTranslationKey('options.base.theme.monokai.label'),
                       },
                     },
+                    value: THEME.MONOKAI,
                   },
                   {
                     key: THEME.XCODE,
-                    value: THEME.XCODE,
                     metadatas: {
                       intlLabel: {
-                        id: getTranslationKey('options.base.theme.xcode.label'),
                         defaultMessage: 'XCode',
+                        id: getTranslationKey('options.base.theme.xcode.label'),
                       },
                     },
+                    value: THEME.XCODE,
                   },
                 ],
+                type: 'select',
+                value: THEME.VS_DARK,
               },
             ],
             sectionTitle: null,

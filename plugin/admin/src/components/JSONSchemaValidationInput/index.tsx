@@ -6,10 +6,9 @@ import { forwardRef, useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import { PLUGIN_ID } from '../../../../shared/constants/plugin';
-import { Styled } from './styled';
 import { getTranslationKey } from '../../utils/getTranslationKey';
-import { parseTmTheme } from 'monaco-themes';
 import { THEME } from '../../utils/themeConstant';
+import { Styled } from './styled';
 
 // TODO: add correct type here
 // type JSONSchemaValidationInputProps = InputProps &
