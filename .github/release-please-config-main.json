@@ -1,9 +1,9 @@
 {
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
   "packages": {
-    ".": {
+    "plugin": {
       "package-name": "strapi-plugin-json-schema-validation",
-      "release-type": "simple",
+      "release-type": "node",
       "changelog-sections": [
         { "type": "feat", "section": "✨ Features", "hidden": false },
         { "type": "fix", "section": "🐛 Bug Fixes", "hidden": false },
@@ -14,8 +14,6 @@
         { "type": "refactor", "section": "🔨 Refactors", "hidden": false },
         { "type": "test", "section": "✅ Tests", "hidden": true }
       ],
-      "prerelease": true,
-      "prerelease-type": "dev",
       "pull-request-title-pattern": "chore(release): ${version} 🎉",
       "pull-request-header": "# NEXT version of strapi-plugin-json-schema-validation is on the way \n"
     }
