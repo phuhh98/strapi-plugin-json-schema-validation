@@ -8,7 +8,10 @@ import { useIntl } from 'react-intl';
 import { PLUGIN_ID } from '../../../../shared/constants/plugin';
 import { Styled } from './styled';
 import { getTranslationKey } from '../../utils/getTranslationKey';
+import { parseTmTheme } from 'monaco-themes';
+import { THEME } from '../../utils/themeConstant';
 
+// TODO: add correct type here
 // type JSONSchemaValidationInputProps = InputProps &
 //   FieldValue<string> & {
 //     intlLabel?: string;
@@ -17,6 +20,7 @@ import { getTranslationKey } from '../../utils/getTranslationKey';
 //     attribute: {
 //       options: {
 //         jsonSchema: string;
+//         theme: string
 //       };
 //     };
 //   };
@@ -143,6 +147,30 @@ export const JSONSchemaValidationInput = forwardRef<HTMLElement, any>((props, re
                   ],
                   validate: true,
                 });
+
+                async function defineTheme() {
+                  const githubTheme = await import('./themes/GitHub.json');
+                  monaco.editor.defineTheme(THEME.GITHUB, githubTheme as unknown as string);
+
+                  const githubLight = await import('./themes/GitHub Light.json');
+                  monaco.editor.defineTheme(THEME.GITHUB_LIGHT, githubLight as unknown as string);
+
+                  const githubDarkTheme = await import('./themes/GitHub Dark.json');
+                  monaco.editor.defineTheme(
+                    THEME.GITHUB_DARK,
+                    githubDarkTheme as unknown as string
+                  );
+
+                  const monokaiTheme = await import('./themes/Monokai.json');
+                  monaco.editor.defineTheme(THEME.MONOKAI, monokaiTheme as unknown as string);
+
+                  const xcodeTheme = await import('./themes/XCode_default.json');
+                  monaco.editor.defineTheme(THEME.XCODE, xcodeTheme as unknown as string);
+                }
+
+                defineTheme().then(function () {
+                  monaco.editor.setTheme(attribute['options']['theme'] || THEME.VS_DARK);
+                });
               }
             }}
             defaultLanguage="json"
@@ -162,7 +190,6 @@ export const JSONSchemaValidationInput = forwardRef<HTMLElement, any>((props, re
               formatOnType: true,
               minimap: { enabled: true },
             }}
-            theme="vs-dark"
             value={internalValue}
           />
           <Styled.ValidationButton onClick={handleValidateClick} size="S">
