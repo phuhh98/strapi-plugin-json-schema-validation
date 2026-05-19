@@ -18,12 +18,9 @@ jobs:
     name: 🏷️ Semantic Release & Tagging
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./plugin
     outputs:
-      plugin--release_created: ${{ steps.release_please.outputs.release_created }}
-      plugin--tag_name: ${{ steps.release_please.outputs.tag_name }}
+      release_created: ${{ steps.release_please.outputs['plugin--release_created'] }}
+      tag_name: ${{ steps.release_please.outputs['plugin--tag_name'] }}
 
     steps:
       - name: ⬇️ Checkout Repository
@@ -44,7 +41,7 @@ jobs:
     name: 📦 Publish package to npm
     needs: release_job
     # We have path output in config file https://github.com/googleapis/release-please-action#path-outputs
-    if: needs.release_job.outputs['plugin--release_created']
+    if: needs.release_job.outputs.release_created
     runs-on: ubuntu-latest
     defaults:
       run:
