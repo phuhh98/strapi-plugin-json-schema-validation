@@ -163,7 +163,7 @@ export const JSONSchemaValidationInput = forwardRef<HTMLElement, any>((props, re
                   const monokaiTheme = await import('./themes/Monokai.json');
                   monaco.editor.defineTheme(THEME.MONOKAI, monokaiTheme as unknown as string);
 
-                  const xcodeTheme = await import('./themes/XCode_default.json');
+                  const xcodeTheme = await import('./themes/Xcode_default.json');
                   monaco.editor.defineTheme(THEME.XCODE, xcodeTheme as unknown as string);
                 }
 
