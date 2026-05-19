@@ -12,6 +12,7 @@ import DRAFT_2020_12_SCHEMA from '../../shared/schemas/DRAFT-2020-12/schema';
 import { getTranslationKey } from './utils/getTranslationKey';
 import { prefixPluginTranslations } from './utils/prefixPluginTranslation';
 import jsonSchemaValidator from './utils/preloadedJsonSchema';
+import { THEME } from './utils/themeConstant';
 
 export default {
   register(app: StrapiApp) {
@@ -49,6 +50,93 @@ export default {
                 name: `options.${JSON_SCHEMA_FIELD_OPTIONS_KEY.base.jsonSchema}`,
                 // @ts-expect-error: 'json' is correct here https://docs.strapi.io/cms/features/custom-fields#registering-a-custom-field-in-the-admin-panel
                 type: 'json',
+              },
+              {
+                description: {
+                  id: getTranslationKey('options.base.theme.description'),
+                  defaultMessage: 'Select the theme for the JSON editor in the content manager.',
+                },
+                intlLabel: {
+                  id: getTranslationKey('options.base.theme.label'),
+                  defaultMessage: 'JSON Editor Theme',
+                },
+                // @ts-expect-error: types from strapi is not 100% correct with custom fields
+                name: `options.${JSON_SCHEMA_FIELD_OPTIONS_KEY.base.theme}`,
+                type: 'select',
+                value: THEME.VS_DARK,
+                options: [
+                  {
+                    key: THEME.VS_DARK,
+                    defaultValue: true,
+                    value: THEME.VS_DARK,
+                    metadatas: {
+                      intlLabel: {
+                        id: getTranslationKey('options.base.theme.vs_dark.label'),
+                        defaultMessage: 'VS-Dark',
+                      },
+                    },
+                  },
+                  {
+                    key: THEME.LIGHT,
+                    value: THEME.LIGHT,
+                    metadatas: {
+                      intlLabel: {
+                        id: getTranslationKey('options.base.theme.light.label'),
+                        defaultMessage: 'Light',
+                      },
+                    },
+                  },
+                  {
+                    key: THEME.GITHUB,
+                    value: THEME.GITHUB,
+                    metadatas: {
+                      intlLabel: {
+                        id: getTranslationKey('options.base.theme.github.label'),
+                        defaultMessage: 'GitHub',
+                      },
+                    },
+                  },
+                  {
+                    key: THEME.GITHUB_LIGHT,
+                    value: THEME.GITHUB_LIGHT,
+                    metadatas: {
+                      intlLabel: {
+                        id: getTranslationKey('options.base.theme.github_light.label'),
+                        defaultMessage: 'GitHub Light',
+                      },
+                    },
+                  },
+                  {
+                    key: THEME.GITHUB_DARK,
+                    value: THEME.GITHUB_DARK,
+                    metadatas: {
+                      intlLabel: {
+                        id: getTranslationKey('options.base.theme.github_dark.label'),
+                        defaultMessage: 'GitHub Dark',
+                      },
+                    },
+                  },
+                  {
+                    key: THEME.MONOKAI,
+                    value: THEME.MONOKAI,
+                    metadatas: {
+                      intlLabel: {
+                        id: getTranslationKey('options.base.theme.monokai.label'),
+                        defaultMessage: 'Monokai',
+                      },
+                    },
+                  },
+                  {
+                    key: THEME.XCODE,
+                    value: THEME.XCODE,
+                    metadatas: {
+                      intlLabel: {
+                        id: getTranslationKey('options.base.theme.xcode.label'),
+                        defaultMessage: 'XCode',
+                      },
+                    },
+                  },
+                ],
               },
             ],
             sectionTitle: null,
@@ -102,6 +190,7 @@ export default {
                 }
               }
             ),
+          [JSON_SCHEMA_FIELD_OPTIONS_KEY.base.theme]: yup.string().required(),
         }),
       },
       pluginId: PLUGIN_ID,
