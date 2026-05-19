@@ -11,7 +11,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "validated": {
+    "json_field": {
       "type": "customField",
       "customField": "plugin::strapi-plugin-json-schema-validation.json-schema-validation",
       "options": {
