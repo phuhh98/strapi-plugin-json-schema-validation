@@ -9,7 +9,7 @@ import {
   PLUGIN_ID,
 } from '../../shared/constants/plugin';
 import DRAFT_2020_12_SCHEMA from '../../shared/schemas/DRAFT-2020-12/schema';
-import { getTranslation } from './utils/getTranslation';
+import { getTranslationKey } from './utils/getTranslationKey';
 import { prefixPluginTranslations } from './utils/prefixPluginTranslation';
 import jsonSchemaValidator from './utils/preloadedJsonSchema';
 
@@ -25,11 +25,11 @@ export default {
       icon: Braces,
       intlDescription: {
         defaultMessage: 'Enter a JSON Schema to validate the content of this field.',
-        id: getTranslation('field.description'),
+        id: getTranslationKey('field.description'),
       },
       intlLabel: {
         defaultMessage: 'JSON Schema Validation',
-        id: getTranslation('field.label'),
+        id: getTranslationKey('field.label'),
       },
       name: PLUGIN_CUSTOM_JSON_FIELD_NAME,
       options: {
@@ -39,11 +39,11 @@ export default {
               {
                 description: {
                   defaultMessage: 'Follow JSON schema DRAFT 2020-12 specification.',
-                  id: getTranslation('options.base.jsonSchema.description'),
+                  id: getTranslationKey('options.base.jsonSchema.description'),
                 },
                 intlLabel: {
                   defaultMessage: 'JSON Schema',
-                  id: getTranslation('options.base.jsonSchema.label'),
+                  id: getTranslationKey('options.base.jsonSchema.label'),
                 },
                 // @ts-expect-error: types from strapi is not 100% correct with custom fields
                 name: `options.${JSON_SCHEMA_FIELD_OPTIONS_KEY.base.jsonSchema}`,

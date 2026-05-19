@@ -4,5 +4,13 @@
   "field.label": "JSON Schema Validation",
   "field.description": "Enter a JSON Schema to validate the content of this field.",
   "options.base.jsonSchema.label": "JSON Schema",
-  "options.base.jsonSchema.description": "The JSON Schema to validate the content of this field against. Follow JSON schema DRAFT 2020-12 specification."
+  "options.base.jsonSchema.description": "The JSON Schema to validate the content of this field against. Follow JSON schema DRAFT 2020-12 specification.",
+  "component.input.editor_loading_message": "Loading JSON editor...",
+  "component.input.validate_button.label": "Validate",
+  "component.input.error.parse_json_error": "Error parsing JSON Schema or data",
+  "component.input.error.validate_json_error": "Error while validating JSON Schema",
+  "component.input.error.json_data_required": "JSON data is required",
+  "component.input.error.validation_error": "Validation errors",
+  "component.input.error.processing_error": "Processing error",
+  "component.input.error.invalid_json_schema_or_data": "Invalid JSON Schema or data"
 }

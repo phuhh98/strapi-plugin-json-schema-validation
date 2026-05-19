@@ -7,6 +7,7 @@ import { useIntl } from 'react-intl';
 
 import { PLUGIN_ID } from '../../../../shared/constants/plugin';
 import { Styled } from './styled';
+import { getTranslationKey } from '../../utils/getTranslationKey';
 
 // type JSONSchemaValidationInputProps = InputProps &
 //   FieldValue<string> & {
@@ -58,7 +59,10 @@ export const JSONSchemaValidationInput = forwardRef<HTMLElement, any>((props, re
       parsedData = typeof data === 'string' ? JSON.parse(data) : data;
     } catch (err) {
       console.error('Error parsing JSON Schema or data:', err);
-      return { error: 'Error parsing JSON Schema or data', isValid: false };
+      return {
+        error: formatMessage({ id: getTranslationKey('component.input.error.parse_json_error') }),
+        isValid: false,
+      };
     }
 
     try {
@@ -69,7 +73,12 @@ export const JSONSchemaValidationInput = forwardRef<HTMLElement, any>((props, re
       return response.data;
     } catch (err) {
       console.error('Error while validating JSON Schema:', err);
-      return { error: 'Error while validating JSON Schema', isValid: false };
+      return {
+        error: formatMessage({
+          id: getTranslationKey('component.input.error.validate_json_error'),
+        }),
+        isValid: false,
+      };
     }
   };
   // const { onChange, value, error } = useField(name);
@@ -79,7 +88,9 @@ export const JSONSchemaValidationInput = forwardRef<HTMLElement, any>((props, re
     console.log('attribute', attribute);
 
     if (!internalValue) {
-      setInternalError('JSON Schema is required');
+      setInternalError(
+        formatMessage({ id: getTranslationKey('component.input.error.json_data_required') })
+      );
       return;
     }
 
@@ -93,10 +104,12 @@ export const JSONSchemaValidationInput = forwardRef<HTMLElement, any>((props, re
     } else {
       setInternalError(
         result.data.errors
-          ? `Validation errors: ${result.data.errors.map((e: { message: string }) => e.message).join('\n')}`
+          ? `${formatMessage({ id: getTranslationKey('component.input.error.validation_error') })}: ${result.data.errors.map((e: { message: string }) => e.message).join('\n')}`
           : result.data.processingError
-            ? `Processing error: ${result.data.processingError}`
-            : 'Invalid JSON Schema or data'
+            ? `${formatMessage({ id: getTranslationKey('component.input.error.processing_error') })}: ${result.data.processingError}`
+            : formatMessage({
+                id: getTranslationKey('component.input.error.invalid_json_schema_or_data'),
+              })
       );
     }
   };
@@ -109,7 +122,13 @@ export const JSONSchemaValidationInput = forwardRef<HTMLElement, any>((props, re
       required={required}
     >
       <Flex alignItems="stretch" direction="column" gap={1}>
-        <Field.Label>{intlLabel?.id ? formatMessage(intlLabel) : label}</Field.Label>
+        <Flex alignItems={'flex-start'} direction={'row'} gap={2}>
+          <Field.Label style={{ display: 'inline' }}>
+            {intlLabel?.id ? formatMessage(intlLabel) : label}
+          </Field.Label>
+          <Field.Hint />
+        </Flex>
+
         <Flex alignItems={'flex-start'} direction={'row'} gap={2} ref={ref}>
           <Editor
             beforeMount={(monaco) => {
@@ -127,14 +146,18 @@ export const JSONSchemaValidationInput = forwardRef<HTMLElement, any>((props, re
               }
             }}
             defaultLanguage="json"
-            height="50rem"
-            loading={<Typography>Loading JSON Editor...</Typography>}
+            height="40rem"
+            loading={
+              <Typography>
+                {formatMessage({ id: getTranslationKey('component.input.editor_loading_message') })}
+              </Typography>
+            }
             onChange={(value) => setInternalValue(value || '')}
             onMount={(editor) => {
               editorRef.current = editor;
             }}
             options={{
-              fontSize: 13,
+              fontSize: 16,
               formatOnPaste: true,
               formatOnType: true,
               minimap: { enabled: true },
@@ -143,10 +166,11 @@ export const JSONSchemaValidationInput = forwardRef<HTMLElement, any>((props, re
             value={internalValue}
           />
           <Styled.ValidationButton onClick={handleValidateClick} size="S">
-            Validate
+            {formatMessage({
+              id: getTranslationKey('component.input.validate_button.label'),
+            })}
           </Styled.ValidationButton>
         </Flex>
-        <Field.Hint />
         <Field.Error />
       </Flex>
     </Field.Root>
