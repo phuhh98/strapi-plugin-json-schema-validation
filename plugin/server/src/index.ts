@@ -15,6 +15,9 @@ import register from './register';
 import routes from './routes';
 import services from './services';
 
+import type { Services as ServicesAlias } from './services';
+import { getServiceName as getServiceNameAlias } from './utils/names';
+
 export default {
   bootstrap,
   config,
@@ -27,3 +30,13 @@ export default {
   routes,
   services,
 };
+
+/**
+ * Control the expose layer of the plugin server controllers for downstream usage.
+ */
+export namespace PluginServer {
+  export namespace Services {
+    export type Services = ServicesAlias;
+    export const getServiceName = getServiceNameAlias;
+  }
+}
