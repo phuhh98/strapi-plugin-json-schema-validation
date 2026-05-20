@@ -62,79 +62,18 @@ export default {
                 },
                 // @ts-expect-error: types from strapi is not 100% correct with custom fields
                 name: `options.${JSON_SCHEMA_FIELD_OPTIONS_KEY.base.theme}`,
-                options: [
-                  {
-                    defaultValue: true,
-                    key: THEME.VS_DARK,
+                options: (function buildThemeOptions() {
+                  return Object.values(THEME).map((theme) => ({
+                    key: theme,
                     metadatas: {
                       intlLabel: {
-                        defaultMessage: 'VS-Dark',
-                        id: getTranslationKey('options.base.theme.vs_dark.label'),
+                        defaultMessage: theme,
+                        id: getTranslationKey(`options.base.theme.${theme as `${THEME}`}.label`),
                       },
                     },
-                    value: THEME.VS_DARK,
-                  },
-                  {
-                    key: THEME.LIGHT,
-                    metadatas: {
-                      intlLabel: {
-                        defaultMessage: 'Light',
-                        id: getTranslationKey('options.base.theme.light.label'),
-                      },
-                    },
-                    value: THEME.LIGHT,
-                  },
-                  {
-                    key: THEME.GITHUB,
-                    metadatas: {
-                      intlLabel: {
-                        defaultMessage: 'GitHub',
-                        id: getTranslationKey('options.base.theme.github.label'),
-                      },
-                    },
-                    value: THEME.GITHUB,
-                  },
-                  {
-                    key: THEME.GITHUB_LIGHT,
-                    metadatas: {
-                      intlLabel: {
-                        defaultMessage: 'GitHub Light',
-                        id: getTranslationKey('options.base.theme.github_light.label'),
-                      },
-                    },
-                    value: THEME.GITHUB_LIGHT,
-                  },
-                  {
-                    key: THEME.GITHUB_DARK,
-                    metadatas: {
-                      intlLabel: {
-                        defaultMessage: 'GitHub Dark',
-                        id: getTranslationKey('options.base.theme.github_dark.label'),
-                      },
-                    },
-                    value: THEME.GITHUB_DARK,
-                  },
-                  {
-                    key: THEME.MONOKAI,
-                    metadatas: {
-                      intlLabel: {
-                        defaultMessage: 'Monokai',
-                        id: getTranslationKey('options.base.theme.monokai.label'),
-                      },
-                    },
-                    value: THEME.MONOKAI,
-                  },
-                  {
-                    key: THEME.XCODE,
-                    metadatas: {
-                      intlLabel: {
-                        defaultMessage: 'XCode',
-                        id: getTranslationKey('options.base.theme.xcode.label'),
-                      },
-                    },
-                    value: THEME.XCODE,
-                  },
-                ],
+                    value: theme,
+                  }));
+                })(),
                 type: 'select',
                 value: THEME.VS_DARK,
               },

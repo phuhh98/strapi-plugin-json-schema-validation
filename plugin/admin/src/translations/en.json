@@ -14,6 +14,7 @@
   "options.base.theme.github_dark.label": "GitHub Dark",
   "options.base.theme.monokai.label": "Monokai",
   "options.base.theme.xcode.label": "Xcode",
+  "options.base.theme.dracula.label": "Dracula",
   "component.input.editor_loading_message": "Loading JSON editor...",
   "component.input.validate_button.label": "Validate",
   "component.input.error.parse_json_error": "Error parsing JSON Schema or data",

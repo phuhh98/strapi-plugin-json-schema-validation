@@ -1,7 +1,10 @@
+import type { editor as IEditor } from 'monaco-editor'; // for monaco editor types
+
 import Editor, { EditorProps } from '@monaco-editor/react';
 import { Field, Flex, Typography } from '@strapi/design-system';
 // import { useField } from '@strapi/strapi/admin';
 import { /* type FieldValue, type InputProps,*/ useFetchClient } from '@strapi/strapi/admin';
+import { kebabCase } from 'lodash';
 import { forwardRef, useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
 
@@ -10,6 +13,26 @@ import { getTranslationKey } from '../../utils/getTranslationKey';
 import { THEME } from '../../utils/themeConstant';
 import { Styled } from './styled';
 
+async function defineTheme(monacoEditor: typeof IEditor) {
+  type ThemeLoadConfig = Array<{
+    name: THEME;
+    themeData: Promise<any>;
+  }>;
+
+  const themesToLoad: ThemeLoadConfig = [
+    { name: THEME.GITHUB, themeData: import('./themes/GitHub.json') },
+    { name: THEME.GITHUB_LIGHT, themeData: import('./themes/GitHub Light.json') },
+    { name: THEME.GITHUB_DARK, themeData: import('./themes/GitHub Dark.json') },
+    { name: THEME.MONOKAI, themeData: import('./themes/Monokai.json') },
+    { name: THEME.XCODE, themeData: import('./themes/Xcode_default.json') },
+    { name: THEME.DRACULA, themeData: import('./themes/Dracula.json') },
+  ];
+
+  for (const theme of themesToLoad) {
+    const themeData = await theme.themeData;
+    monacoEditor.defineTheme(getValidThemeName(theme.name), themeData);
+  }
+}
 // TODO: add correct type here
 // type JSONSchemaValidationInputProps = InputProps &
 //   FieldValue<string> & {
@@ -23,6 +46,9 @@ import { Styled } from './styled';
 //       };
 //     };
 //   };
+function getValidThemeName(themeName: string): string {
+  return kebabCase(themeName);
+}
 
 export const JSONSchemaValidationInput = forwardRef<HTMLElement, any>((props, ref) => {
   const {
@@ -60,8 +86,7 @@ export const JSONSchemaValidationInput = forwardRef<HTMLElement, any>((props, re
     try {
       parsedSchema = typeof jsonSchema === 'string' ? JSON.parse(jsonSchema) : jsonSchema;
       parsedData = typeof data === 'string' ? JSON.parse(data) : data;
-    } catch (err) {
-      console.error('Error parsing JSON Schema or data:', err);
+    } catch (_err) {
       return {
         error: formatMessage({ id: getTranslationKey('component.input.error.parse_json_error') }),
         isValid: false,
@@ -74,8 +99,7 @@ export const JSONSchemaValidationInput = forwardRef<HTMLElement, any>((props, re
         schema: parsedSchema,
       });
       return response.data;
-    } catch (err) {
-      console.error('Error while validating JSON Schema:', err);
+    } catch (_err) {
       return {
         error: formatMessage({
           id: getTranslationKey('component.input.error.validate_json_error'),
@@ -88,7 +112,6 @@ export const JSONSchemaValidationInput = forwardRef<HTMLElement, any>((props, re
 
   const handleValidateClick = async () => {
     triggerEditorFormat();
-    console.log('attribute', attribute);
 
     if (!internalValue) {
       setInternalError(
@@ -98,8 +121,6 @@ export const JSONSchemaValidationInput = forwardRef<HTMLElement, any>((props, re
     }
 
     const result = await validateJSONSchema(attribute['options']['jsonSchema'], internalValue);
-
-    console.log('result', result);
 
     if (result.data.isValid) {
       setInternalError('');
@@ -134,42 +155,24 @@ export const JSONSchemaValidationInput = forwardRef<HTMLElement, any>((props, re
 
         <Flex alignItems={'flex-start'} direction={'row'} gap={2} ref={ref}>
           <Editor
-            beforeMount={(monaco) => {
+            beforeMount={async (monaco: typeof import('monaco-editor')) => {
               if (monaco) {
-                monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+                monaco.json.jsonDefaults.setDiagnosticsOptions({
                   schemas: [
                     {
-                      // uri: MY_JSON_SCHEMA.id,
                       fileMatch: ['*'], // Apply this schema to the current editor instance
                       schema: JSON.parse(attribute['options']['jsonSchema']),
+                      uri: JSON.parse(attribute['options']['jsonSchema']).id,
                     },
                   ],
                   validate: true,
                 });
 
-                async function defineTheme() {
-                  const githubTheme = await import('./themes/GitHub.json');
-                  monaco.editor.defineTheme(THEME.GITHUB, githubTheme as unknown as string);
+                await defineTheme(monaco.editor);
 
-                  const githubLight = await import('./themes/GitHub Light.json');
-                  monaco.editor.defineTheme(THEME.GITHUB_LIGHT, githubLight as unknown as string);
-
-                  const githubDarkTheme = await import('./themes/GitHub Dark.json');
-                  monaco.editor.defineTheme(
-                    THEME.GITHUB_DARK,
-                    githubDarkTheme as unknown as string
-                  );
-
-                  const monokaiTheme = await import('./themes/Monokai.json');
-                  monaco.editor.defineTheme(THEME.MONOKAI, monokaiTheme as unknown as string);
-
-                  const xcodeTheme = await import('./themes/Xcode_default.json');
-                  monaco.editor.defineTheme(THEME.XCODE, xcodeTheme as unknown as string);
-                }
-
-                defineTheme().then(function () {
-                  monaco.editor.setTheme(attribute['options']['theme'] || THEME.VS_DARK);
-                });
+                monaco.editor.setTheme(
+                  getValidThemeName(attribute['options']['theme'] || THEME.VS_DARK)
+                );
               }
             }}
             defaultLanguage="json"

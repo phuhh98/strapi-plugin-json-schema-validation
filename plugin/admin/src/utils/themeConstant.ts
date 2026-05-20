@@ -1,9 +1,10 @@
 export enum THEME {
+  DRACULA = 'dracula',
   GITHUB = 'github',
-  GITHUB_DARK = 'github-dark',
-  GITHUB_LIGHT = 'github-light',
+  GITHUB_DARK = 'github_dark',
+  GITHUB_LIGHT = 'github_light',
   LIGHT = 'light',
   MONOKAI = 'monokai',
-  VS_DARK = 'vs-dark',
+  VS_DARK = 'vs_dark',
   XCODE = 'xcode',
 }

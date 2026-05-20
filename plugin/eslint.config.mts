@@ -18,6 +18,7 @@ export default defineConfig([
   {
     rules: {
       '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/no-namespace': 'off',
       '@typescript-eslint/no-unused-vars': [
         'error',
         {
@@ -27,6 +28,7 @@ export default defineConfig([
           varsIgnorePattern: '^_',
         },
       ],
+      'no-console': ['error', { allow: ['warn', 'error'] }],
       'no-unused-vars': 'off',
       'react/react-in-jsx-scope': 'off',
     },
