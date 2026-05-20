@@ -2,7 +2,7 @@
   "version": "v1",
   "packages": {
     "strapi-plugin-json-schema-validation": {
-      "signature": "2c9d051cbfa52e1946cd0fc99c944234",
+      "signature": "20657d7acbd215c7befd224b6b348f07",
       "link": true,
       "replaced": "file:.yalc/strapi-plugin-json-schema-validation"
     }
