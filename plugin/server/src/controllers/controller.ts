@@ -1,15 +1,15 @@
 import type { Core } from '@strapi/strapi';
 
 import { PLUGIN_ID } from '../../../shared/constants/plugin';
-import { Service } from '../services/service';
 import { getServiceName } from '../utils/names';
+import { Services } from '../services';
 
 const controller = ({ strapi }: { strapi: Core.Strapi }) => ({
   index(ctx) {
     ctx.body = strapi
       .plugin(PLUGIN_ID)
       // the name of the service file & the method.
-      .service<Service>(getServiceName('service'))
+      .service<Services['service']>(getServiceName('service'))
       .getWelcomeMessage();
   },
 });
