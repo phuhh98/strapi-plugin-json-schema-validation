@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.2.0](https://github.com/phuhh98/strapi-plugin-json-schema-validation/compare/strapi-plugin-json-schema-validation-v0.1.0...strapi-plugin-json-schema-validation-v0.2.0) (2026-05-20)
+
+
+### ✨ Features
+
+* **namespace:** expose services via PluginServer namespace ([414d810](https://github.com/phuhh98/strapi-plugin-json-schema-validation/commit/414d810f0d7c2f610f52a1595ba9045038bbe1bd))
+* **server:** expose service helper as namespace ([4c88101](https://github.com/phuhh98/strapi-plugin-json-schema-validation/commit/4c88101c8c06f925fe5d8d5b2b745d9de8823af0))
+
+
+### 📚 Documentation
+
+* **README:** use raw screenshots links from github ([5e609b8](https://github.com/phuhh98/strapi-plugin-json-schema-validation/commit/5e609b83092838c158c874c3584a1c218d9ddc82))
+
+
+### 🔨 Refactors
+
+* **admin:** add createThemeOption and separate defineTheme function ([5eb0bf0](https://github.com/phuhh98/strapi-plugin-json-schema-validation/commit/5eb0bf036f0fba8046dfa345d2b04e8b7e9c8d83))
+
 ## [0.1.0](https://github.com/phuhh98/strapi-plugin-json-schema-validation/compare/strapi-plugin-json-schema-validation-v0.0.2...strapi-plugin-json-schema-validation-v0.1.0) (2026-05-19)
 
 
