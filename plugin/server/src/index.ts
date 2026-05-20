@@ -1,3 +1,5 @@
+import type { Services as ServicesAlias } from './services';
+
 /**
  * Application methods
  */
@@ -14,8 +16,6 @@ import policies from './policies';
 import register from './register';
 import routes from './routes';
 import services from './services';
-
-import type { Services as ServicesAlias } from './services';
 import { getServiceName as getServiceNameAlias } from './utils/names';
 
 export default {

@@ -13,7 +13,6 @@ const validation = ({ strapi: _strapi }: { strapi: Core.Strapi }) => ({
         isValid: valid,
       };
     } catch (err) {
-      console.error('Error while validating JSON Schema:', err);
       return { isValid: false, processingError: `Error while validating JSON Schema: ${err}` };
     }
   },
@@ -31,8 +30,7 @@ const validation = ({ strapi: _strapi }: { strapi: Core.Strapi }) => ({
         errors: ajv.errors,
         isValid,
       };
-    } catch (err) {
-      console.error('Error while validating JSON Schema structure:', err);
+    } catch (_err) {
       return { isValid: false, processingError: 'Error while validating JSON Schema structure' };
     }
   },
