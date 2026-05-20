@@ -6,8 +6,6 @@
 ### ✨ Features
 
 * **namespace:** expose services via PluginServer namespace ([414d810](https://github.com/phuhh98/strapi-plugin-json-schema-validation/commit/414d810f0d7c2f610f52a1595ba9045038bbe1bd))
-* **server:** expose service helper as namespace ([4c88101](https://github.com/phuhh98/strapi-plugin-json-schema-validation/commit/4c88101c8c06f925fe5d8d5b2b745d9de8823af0))
-
 
 ### 📚 Documentation
 
