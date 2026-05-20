@@ -85,4 +85,8 @@ export default config;
 ### UI
 - [ ] Theme to match Strapi design system colors
 
+-----
+Buy me a coffee <img src="https://raw.githubusercontent.com/phuhh98/strapi-plugin-json-schema-validation/main/screenshots/coffee.png" alt="Buy me a coffee" width="20">
+
+[<img src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" alt="Donate with PayPal" width="100">](https://paypal.me/phuhh98)
 
