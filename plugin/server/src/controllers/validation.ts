@@ -1,8 +1,8 @@
 import type { Core } from '@strapi/strapi';
 
 import { PLUGIN_ID } from '../../../shared/constants/plugin';
-import { getServiceName } from '../utils/names';
 import { Services } from '../services';
+import { getServiceName } from '../utils/names';
 
 const validation = ({ strapi }: { strapi: Core.Strapi }) => ({
   async validateSchema(ctx) {
