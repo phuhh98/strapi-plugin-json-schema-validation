@@ -52,13 +52,13 @@ export default config;
 
 ## Screenshots
 ### Options in content type builder
-![JSON Schema validation field in content type builder](../screenshots/content-type-edit.png)
+![JSON Schema validation field in content type builder](https://raw.githubusercontent.com/phuhh98/strapi-plugin-json-schema-validation/main/screenshots/content-type-edit.png)
 
 ### Editing monaco editor
-![Monaco editor for JSON Schema validation field](../screenshots/record-editing.png)
+![Monaco editor for JSON Schema validation field](https://raw.githubusercontent.com/phuhh98/strapi-plugin-json-schema-validation/main/screenshots/record-editing.png)
 
 ### Validation error display
-![Validation error display in monaco editor](../screenshots/validation-error.png)
+![Validation error display in monaco editor](https://raw.githubusercontent.com/phuhh98/strapi-plugin-json-schema-validation/main/screenshots/validation-error.png)
 
 
 
