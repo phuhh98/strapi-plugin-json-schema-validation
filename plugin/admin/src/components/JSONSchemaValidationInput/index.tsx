@@ -5,7 +5,7 @@ import { Field, Flex, Typography } from '@strapi/design-system';
 // import { useField } from '@strapi/strapi/admin';
 import { /* type FieldValue, type InputProps,*/ useFetchClient } from '@strapi/strapi/admin';
 import { kebabCase } from 'lodash';
-import { forwardRef, useRef, useState } from 'react';
+import { forwardRef, useEffect, useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import { PLUGIN_ID } from '../../../../shared/constants/plugin';
@@ -77,7 +77,7 @@ export const JSONSchemaValidationInput = forwardRef<HTMLElement, any>((props, re
   const { formatMessage } = useIntl();
   const { post } = useFetchClient();
 
-  const [internalValue, setInternalValue] = useState<string>(value);
+  const [internalValue, setInternalValue] = useState<string>(JSON.stringify(value));
   const [internalError, setInternalError] = useState<string>(error ?? '');
 
   const validateJSONSchema = async (jsonSchema: object | string, data: object | string) => {
@@ -138,6 +138,11 @@ export const JSONSchemaValidationInput = forwardRef<HTMLElement, any>((props, re
     }
   };
 
+  // Wire onchange with change of intervalValue to signal host
+  useEffect(() => {
+    onChange({ target: { name, value: internalValue, type: attribute.type } });
+  }, [internalValue, name, onChange]);
+
   return (
     <Field.Root
       error={internalError}
@@ -185,6 +190,7 @@ export const JSONSchemaValidationInput = forwardRef<HTMLElement, any>((props, re
             onChange={(value) => setInternalValue(value || '')}
             onMount={(editor) => {
               editorRef.current = editor;
+              editor.trigger('manual', 'editor.action.formatDocument', null);
             }}
             options={{
               fontSize: 16,
