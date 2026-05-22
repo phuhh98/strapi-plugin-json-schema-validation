@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/phuhh98/strapi-plugin-json-schema-validation/compare/strapi-plugin-json-schema-validation-v0.2.0...strapi-plugin-json-schema-validation-v0.2.1) (2026-05-22)
+
+
+### 🐛 Bug Fixes
+
+* **deps:** align react, styled-components, react-intl versions ([eacaf54](https://github.com/phuhh98/strapi-plugin-json-schema-validation/commit/eacaf545e5eb4a15eaf78f94a48d345e3db64c9e))
+
 ## [0.2.0](https://github.com/phuhh98/strapi-plugin-json-schema-validation/compare/strapi-plugin-json-schema-validation-v0.1.0...strapi-plugin-json-schema-validation-v0.2.0) (2026-05-20)
 
 
