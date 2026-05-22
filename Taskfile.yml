@@ -31,3 +31,21 @@ tasks:
     deps:
       - start-plugin-watch
       - start-strapi-dev
+
+  test-install-published-package:
+    desc: Test installation of the package locally
+    cmds:
+      - |
+        set -e
+        mkdir -p .tmp
+        cd .tmp
+        npm pack ../plugin
+        npx create-strapi@latest test-strapi --quickstart --no-run
+        PLUGIN_TARBALL=$(ls strapi-plugin-json-schema-validation-*.tgz | head -n 1)
+        cd test-strapi
+        npm install "../$PLUGIN_TARBALL"
+  test-cleanup:
+    desc: Clean up test artifacts
+    dir: .
+    cmds:
+      - rm -rf .tmp
