@@ -14,5 +14,4 @@ Refer to the caveman-commit skill documentation for message format and requireme
 
 ## Commit Type Rules
 
-- Use `fix()` only for changes to `package.json` and `package-lock.json` that resolve bugs or dependency issues.
-- Use `chore()` for all other changes, including agent files, settings, documentation, and configuration updates.
+- Use `chore()` for all changes related to agent configuration files (such as files in `.agents/`).
