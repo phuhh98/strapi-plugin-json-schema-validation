@@ -1,0 +1,7 @@
+{
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "embedded",
+  "dolt_database": "strapi_plugin_json_schema_validation",
+  "project_id": "c19c52b1-6376-4cf3-9699-63decfa1dc64"
+}
