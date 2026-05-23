@@ -15,6 +15,8 @@
   "options.base.theme.monokai.label": "Monokai",
   "options.base.theme.xcode.label": "Xcode",
   "options.base.theme.dracula.label": "Dracula",
+  "options.advance.required.label": "Required",
+  "options.advance.required.description": "You won't be able to create an entry if this field is empty",
   "component.input.editor_loading_message": "Loading JSON editor...",
   "component.input.validate_button.label": "Validate",
   "component.input.error.parse_json_error": "Error parsing JSON Schema or data",

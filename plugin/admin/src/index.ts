@@ -34,6 +34,28 @@ export default {
       },
       name: PLUGIN_CUSTOM_JSON_FIELD_NAME,
       options: {
+        advanced: [
+          {
+            items: [
+              {
+                description: {
+                  defaultMessage: "You won't be able to create an entry if this field is empty",
+                  id: getTranslationKey('options.advance.required.description'),
+                },
+                intlLabel: {
+                  defaultMessage: 'Required',
+                  id: getTranslationKey('options.advance.required.label'),
+                },
+                // @ts-expect-error: types from strapi is not 100% correct with custom fields
+
+                name: `options.${JSON_SCHEMA_FIELD_OPTIONS_KEY.advanced.required}`,
+                type: 'checkbox',
+              },
+            ],
+            sectionTitle: null,
+          },
+        ],
+
         base: [
           {
             items: [
@@ -52,6 +74,7 @@ export default {
                 type: 'json',
               },
               {
+                defaultValue: THEME.VS_DARK,
                 description: {
                   defaultMessage: 'Select the theme for the JSON editor in the content manager.',
                   id: getTranslationKey('options.base.theme.description'),
@@ -83,6 +106,7 @@ export default {
         ],
 
         validator: () => ({
+          [JSON_SCHEMA_FIELD_OPTIONS_KEY.advanced.required]: yup.boolean().default(false),
           [JSON_SCHEMA_FIELD_OPTIONS_KEY.base.jsonSchema]: yup
             .string()
             .required('JSON Schema is required')
