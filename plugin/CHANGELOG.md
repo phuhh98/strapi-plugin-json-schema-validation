@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.3.0](https://github.com/phuhh98/strapi-plugin-json-schema-validation/compare/strapi-plugin-json-schema-validation-v0.2.1...strapi-plugin-json-schema-validation-v0.3.0) (2026-05-23)
+
+
+### ✨ Features
+
+* **plugin:** validation field before create or update ([ac0f20e](https://github.com/phuhh98/strapi-plugin-json-schema-validation/commit/ac0f20e576150f90a6dd04151e529d509e9e7af1))
+
+
+### 🐛 Bug Fixes
+
+* **field-comp:** wire onChange; field render with preparse JSON.stringify ([06416ee](https://github.com/phuhh98/strapi-plugin-json-schema-validation/commit/06416eea3bd808aabb0ef88cac0340d561aa8bd3))
+
+
+### 📚 Documentation
+
+* **README:** add check point for required field & validate on create/save ([9349755](https://github.com/phuhh98/strapi-plugin-json-schema-validation/commit/9349755fc52581c5fce15ebcb98c1ed7174ae5d9))
+
 ## [0.2.1](https://github.com/phuhh98/strapi-plugin-json-schema-validation/compare/strapi-plugin-json-schema-validation-v0.2.0...strapi-plugin-json-schema-validation-v0.2.1) (2026-05-22)
 
 
