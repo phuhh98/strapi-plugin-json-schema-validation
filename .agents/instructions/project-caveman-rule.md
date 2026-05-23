@@ -7,7 +7,14 @@ author: GitHub Copilot
 tags: [caveman, strapi, json-schema, agent-instructions]
 ---
 
-# Caveman Skills Usage Rule for strapi-plugin-json-schema-validation
+# Caveman Mode Enforcement
+
+This project enforces active use of caveman instruction and skills for all agent responses and workflows.
+
+- Caveman mode (full) is the default for all technical communication, issue tracking, and code review.
+- All agents and contributors must follow caveman rules as described in .agents/skills/caveman/SKILL.md.
+- No filler, hedging, or pleasantries. Use terse, technical fragments. See SKILL.md for intensity levels and examples.
+- To disable, explicitly state "stop caveman" or "normal mode".
 
 ## Caveman Skills Overview
 
@@ -25,10 +32,6 @@ This project requires the following caveman skills for token-efficient, compress
 
 **Always use the appropriate caveman skill for the task.**
 
-## Purpose
-
-This instruction enforces the use of the `caveman` skills for all agent work in this project, which is a Strapi plugin for providing a JSON Schema Validation custom field.
-
 ## Rules
 
 - Use `caveman` mode for all agent responses unless the user explicitly requests normal mode.
@@ -38,6 +41,13 @@ This instruction enforces the use of the `caveman` skills for all agent work in 
 - Use `cavecrew` subagents for compressed code search, 1-2 file edits, or terse reviews when context budget is a concern.
 - Use `caveman-commit` for all commit messages: terse, Conventional Commits, ≤50 char subject, no fluff.
 - Use `caveman-compress` to compress memory/markdown files and save tokens.
+
+## Reference
+
+- See .agents/skills/caveman/SKILL.md for full rules and intensity options.
+
+_Last updated: May 23, 2026_
+
 - Use `caveman-help` to display caveman quick-reference for modes, skills, and triggers.
 - Use `caveman-review` for code review: one-line, actionable, location/problem/fix format.
 - Use `caveman-stats` to show real token usage and savings for the session.
