@@ -75,18 +75,17 @@ export default config;
 
 ### Advanced Options
 - [ ] **Schema URL**: allow users to provide a URL to fetch the JSON Schema from, in addition to the plain JSON Schema input
+- [x] **Required field**: allow users to specify if the field is required or not, and enforce this requirement during validation
 
-
-- [ ] **Validate on save - server side**: validate the content of the field against the defined JSON Schema when saving the entry, and display validation errors in the UI
 
 ### DX
-- [ ] Expose plugin validation services
+- [ ] **Expose plugin validation services**
+- [x] **Validate on create/save - server side lifecycle hook**
 
 ### UI
-- [ ] Theme to match Strapi design system colors
+- [ ] **Theme to match Strapi design system colors**
 
 -----
-Buy me a coffee <img src="https://raw.githubusercontent.com/phuhh98/strapi-plugin-json-schema-validation/main/screenshots/coffee.png" alt="Buy me a coffee" width="20">
+Support me here <img src="https://raw.githubusercontent.com/phuhh98/strapi-plugin-json-schema-validation/main/screenshots/coffee.png" alt="Buy me a coffee" width="20">
 
-[<img src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" alt="Donate with PayPal" width="100">](https://paypal.me/phuhh98)
-
+[<img src="https://linksta.cc/assets/linkstack/images/logo.svg" width="16"> LinkStack](https://linksta.cc/@phuhh98)
