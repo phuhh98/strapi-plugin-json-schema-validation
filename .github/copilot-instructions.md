@@ -13,3 +13,8 @@ Run `bd prime` for workflow context.
 ## Additional Skills, Agents, and Instructions
 
 Refer to the content under .agents folder along with default .github folder
+
+<!-- SPECKIT START -->
+For additional context about technologies to be used, project structure,
+shell commands, and other important information, read the current plan
+<!-- SPECKIT END -->
